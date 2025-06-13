@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta name="dicoding:email" content="dindapamungkas11@gmail.com">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulih - Aplikasi Pemulihan Bebas Judi Online</title>
+    <style>
+        :root {
+            /* Solid Pastel Colors - Adjusted */
+            --pastel-purple: #B19CD9; /* Lavender Pastel */
+            --pastel-blue: #A7C7E7;  /* Sky Blue Pastel */
+            --pastel-green: #B2D8B2; /* Mint Green Pastel */
+            --pastel-pink: #FFC0CB;  /* Light Pink Pastel */
+            --pastel-yellow: #FDFD96; /* Pale Yellow Pastel */
+            --pastel-orange: #FFDAB9; /* Peach Pastel */
+
+            /* Core UI Colors - Adjusted for more solid pastel feel */
+            --bg-color-light: linear-gradient(135deg, var(--pastel-blue) 0%, var(--pastel-purple) 100%); /* Blue to Purple gradient */
+            --container-bg-light: rgba(255, 255, 255, 0.95);
+            --header-bg-light: linear-gradient(135deg, var(--pastel-green) 0%, var(--pastel-blue) 100%); /* Green to Blue gradient */
+            --header-color-light: #333; /* Darker text for better contrast on pastel header */
+            --section-bg-light: white;
+            --text-color-dark: #333;
+            --text-color-medium: #666;
+            --border-color-light: #e0e0e0;
+            --primary-button-bg-light: linear-gradient(135deg, var(--pastel-purple) 0%, #8A2BE2 100%); /* Stronger purple */
+            --primary-button-color-light: white;
+            --secondary-button-bg-light: #f8f9fa;
+            --secondary-button-color-light: #333;
+            --ai-analysis-bg-light: linear-gradient(135deg, var(--pastel-yellow) 0%, var(--pastel-orange) 100%); /* Yellow to Orange */
+            --ai-analysis-border-light: #FF5733; /* Vibrant orange-red */
+            --journal-entry-bg-light: #f8f9fa;
+            --journal-entry-border-light: var(--pastel-green);
+            --mood-btn-bg-light: transparent;
+            --mood-btn-border-light: #e0e0e0;
+            --mood-btn-hover-bg-light: var(--pastel-green);
+            --mood-btn-hover-color-light: white;
+            --chatbot-bg-light: white;
+            --chatbot-header-bg-light: linear-gradient(135deg, var(--pastel-purple) 0%, var(--pastel-blue) 100%);
+            --chatbot-user-msg-bg-light: linear-gradient(135deg, var(--pastel-purple) 0%, #8A2BE2 100%);
+            --chatbot-user-msg-color-light: white;
+            --chatbot-bot-msg-bg-light: #f1f3f4;
+            --chatbot-bot-msg-color-light: #333;
+            --chatbot-system-msg-bg-light: var(--pastel-pink);
+            --chatbot-system-msg-color-light: #800000; /* Darker text for pink background */
+            --quick-response-bg-light: #f1f3f4;
+            --quick-response-border-light: #e0e0e0;
+            --quick-response-hover-bg-light: var(--pastel-blue);
+            --quick-response-hover-color-light: white;
+            --accent-color: #764ba2; /* Original accent for some elements */
+        }
+
+        body.dark-mode {
+            /* Dark Mode Colors - Adjusted for corresponding solid pastel dark feel */
+            --bg-color-light: linear-gradient(135deg, #2C3E50 0%, #1A2A3A 100%); /* Darker slate blue */
+            --container-bg-light: rgba(40, 55, 71, 0.95);
+            --header-bg-light: linear-gradient(135deg, #34495E 0%, #2C3E50 100%);
+            --header-color-light: #ECF0F1;
+            --section-bg-light: #34495E;
+            --text-color-dark: #ECF0F1;
+            --text-color-medium: #BDC3C7;
+            --border-color-light: #5A6A7A;
+            --primary-button-bg-light: linear-gradient(135deg, #3498DB 0%, #9B59B6 100%); /* Darker blue to purple */
+            --primary-button-color-light: white;
+            --secondary-button-bg-light: #5A6A7A;
+            --secondary-button-color-light: white;
+            --ai-analysis-bg-light: linear-gradient(135deg, #5C4B5C 0%, #4D3C4D 100%); /* Darker muted tones */
+            --ai-analysis-border-light: #E74C3C;
+            --journal-entry-bg-light: #495E71;
+            --journal-entry-border-light: #3498DB;
+            --mood-btn-bg-light: transparent;
+            --mood-btn-border-light: #BDC3C7;
+            --mood-btn-hover-bg-light: #3498DB;
+            --mood-btn-hover-color-light: white;
+            --chatbot-bg-light: #2C3E50;
+            --chatbot-header-bg-light: linear-gradient(135deg, #3498DB 0%, #9B59B6 100%);
+            --chatbot-user-msg-bg-light: linear-gradient(135deg, #3498DB 0%, #9B59B6 100%);
+            --chatbot-user-msg-color-light: white;
+            --chatbot-bot-msg-bg-light: #4A5D6E;
+            --chatbot-bot-msg-color-light: #ECF0F1;
+            --chatbot-system-msg-bg-light: #9B59B6;
+            --chatbot-system-msg-color-light: white;
+            --quick-response-bg-light: #5A6A7A;
+            --quick-response-border-light: #7F8C8D;
+            --quick-response-hover-bg-light: #3498DB;
+            --quick-response-hover-color-light: white;
+        }
+
+        /* General styles, largely kept from original */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color-light);
+            min-height: 100vh;
+            padding: 20px;
+            transition: background 0.3s ease, color 0.3s ease;
+            color: var(--text-color-dark);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--container-bg-light);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .header {
+            background: var(--header-bg-light);
+            padding: 30px;
+            text-align: center;
+            color: var(--header-color-light);
+            position: relative;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Lighter shadow for pastel */
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .logo {
+            font-size: 3em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .dark-mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.1); /* Darker for better contrast */
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2em;
+            color: var(--header-color-light); /* Adjusted to header color */
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            background: rgba(0, 0, 0, 0.2); /* Darker hover */
+        }
+
+        .main-content {
+            padding: 40px;
+            position: relative; /* For absolute positioning of sections */
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            background-color: var(--header-bg-light); /* Using header color for consistency */
+            padding: 15px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border-radius: 0 0 20px 20px;
+        }
+        .navbar button {
+            background: none;
+            border: none;
+            color: var(--header-color-light); /* Text color from header */
+            font-size: 1em;
+            font-weight: 600;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            flex: 1; /* Distribute space evenly */
+            text-align: center;
+        }
+        .navbar button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .navbar button.active {
+            background-color: rgba(255, 255, 255, 0.3);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Sections Styling */
+        .content-section {
+            display: none; /* Hidden by default, shown by JS */
+            padding: 0px 0;
+            animation: fadeIn 0.5s ease-out;
+        }
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-box {
+            background: var(--section-bg-light);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: background 0.3s ease;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--pastel-pink) 0%, var(--pastel-yellow) 100%); /* Pink to Yellow */
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .dark-mode .stat-card {
+            background: linear-gradient(135deg, #6C5B7B 0%, #8D6B9E 100%); /* Darker, richer tones */
+            color: white;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: var(--text-color-dark);
+            margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .dark-mode .stat-number {
+            color: var(--text-color-dark);
+        }
+
+        .stat-label {
+            color: var(--text-color-medium);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .dark-mode .stat-label {
+            color: var(--text-color-medium);
+        }
+
+        .section-title {
+            font-size: 1.6em; /* Slightly larger */
+            color: var(--text-color-dark);
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--pastel-green); /* Use a pastel color */
+            padding-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color-medium);
+            transition: color 0.3s ease;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color-light);
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+            background: var(--section-bg-light);
+            color: var(--text-color-dark);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--pastel-blue); /* Focus color */
+            box-shadow: 0 0 10px rgba(167, 199, 231, 0.4); /* Pastel blue shadow */
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .mood-selector {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .mood-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--mood-btn-border-light);
+            background: var(--mood-btn-bg-light);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            color: var(--text-color-dark);
+        }
+
+        .mood-btn:hover, .mood-btn.active {
+            background: var(--mood-btn-hover-bg-light);
+            color: var(--mood-btn-hover-color-light);
+            border-color: var(--mood-btn-hover-bg-light);
+            transform: scale(1.05);
+        }
+
+        .btn-primary {
+            background: var(--primary-button-bg-light);
+            color: var(--primary-button-color-light);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-button-bg-light);
+            color: var(--secondary-button-color-light);
+            padding: 12px 25px;
+            border: 2px solid var(--border-color-light);
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+        }
+
+        .dark-mode .btn-secondary:hover {
+            background: #5a6268;
+            border-color: #545b62;
+        }
+
+        .ai-analysis {
+            background: var(--ai-analysis-bg-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            border-left: 5px solid var(--ai-analysis-border-light);
+            transition: background 0.3s ease;
+            color: var(--text-color-dark); /* Ensure text is readable */
+        }
+
+        .ai-analysis h3 {
+            color: #d63031; /* Keeping this strong for warning tone */
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dark-mode .ai-analysis h3 {
+            color: #e74c3c;
+        }
+
+        .ai-analysis p {
+            line-height: 1.6;
+            color: var(--text-color-dark);
+        }
+
+        .journal-entries {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .journal-entry {
+            background: var(--journal-entry-bg-light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--journal-entry-border-light);
+            transition: background 0.3s ease;
+            color: var(--text-color-dark);
+        }
+
+        .entry-date {
+            font-size: 0.9em;
+            color: var(--text-color-medium);
+            margin-bottom: 10px;
+        }
+
+        .entry-mood {
+            display: inline-block;
+            background: var(--pastel-green); /* Consistent with theme */
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-bottom: 10px;
+        }
+
+        .dark-mode .entry-mood {
+            background: #3498DB; /* Dark mode blue */
+        }
+
+        .crisis-banner {
+            background: linear-gradient(135deg, #FF6B6B 0%, #EE5A24 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(238, 90, 36, 0.3);
+        }
+
+        .crisis-banner h3 {
+            margin-bottom: 10px;
+        }
+
+        .crisis-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .contact-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid white;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: white;
+            color: #ee5a24;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--pastel-blue); /* Spinner color */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        .dark-mode .spinner {
+            border-top: 4px solid #3498DB;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border: 1px solid #ffecb5;
+            color: #856404;
+        }
+        .dark-mode .alert-warning {
+            background: #6a5300;
+            border-color: #a08400;
+            color: #ffda6a;
+        }
+
+        .alert-success {
+            background: #d1edff;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        .dark-mode .alert-success {
+            background: #0d47a1;
+            border-color: #1976d2;
+            color: #bbdefb;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .dark-mode .alert-danger {
+            background: #7b000b;
+            border-color: #d32f2f;
+            color: #ffcdd2;
+        }
+
+        /* Chatbot styles, mostly kept from original */
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-button-bg-light);
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+        }
+
+        .chatbot-container {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 400px;
+            height: 600px;
+            background: var(--chatbot-bg-light);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 999;
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+
+        .chatbot-header {
+            background: var(--chatbot-header-bg-light);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            transition: background 0.3s ease;
+        }
+
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .chatbot-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .chatbot-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            line-height: 1.4;
+            word-wrap: break-word;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .message.user {
+            background: var(--chatbot-user-msg-bg-light);
+            color: var(--chatbot-user-msg-color-light);
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .message.bot {
+            background: var(--chatbot-bot-msg-bg-light);
+            color: var(--chatbot-bot-msg-color-light);
+            align-self: flex-start;
+        }
+
+        .message.system {
+            background: var(--chatbot-system-msg-bg-light);
+            color: var(--chatbot-system-msg-color-light);
+            align-self: center;
+            text-align: center;
+            font-style: italic;
+            max-width: 90%;
+        }
+
+        .chatbot-input-area {
+            padding: 20px;
+            border-top: 1px solid var(--border-color-light);
+            display: flex;
+            gap: 10px;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid var(--border-color-light);
+            border-radius: 25px;
+            outline: none;
+            transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+            background: var(--section-bg-light);
+            color: var(--text-color-dark);
+        }
+
+        .chatbot-input:focus {
+            border-color: var(--pastel-purple);
+        }
+        .dark-mode .chatbot-input:focus {
+            border-color: #3498DB;
+        }
+
+        .chatbot-send {
+            background: var(--primary-button-bg-light);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-send:hover {
+            transform: scale(1.05);
+        }
+
+        .chatbot-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 5px;
+            padding: 12px 16px;
+            background: var(--chatbot-bot-msg-bg-light);
+            border-radius: 18px;
+            align-self: flex-start;
+            max-width: 80px;
+            transition: background 0.3s ease;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #999;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        .dark-mode .typing-dot {
+            background: #BDC3C7;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% {
+                transform: scale(0);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .quick-responses {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 0 20px 10px;
+        }
+
+        .quick-response {
+            background: var(--quick-response-bg-light);
+            border: 1px solid var(--quick-response-border-light);
+            padding: 8px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            color: var(--text-color-dark);
+        }
+
+        .quick-response:hover {
+            background: var(--quick-response-hover-bg-light);
+            color: var(--quick-response-hover-color-light);
+            border-color: var(--quick-response-hover-bg-light);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                margin: 0 auto;
+                border-radius: 15px;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .navbar {
+                flex-wrap: wrap;
+                padding: 10px 0;
+            }
+            .navbar button {
+                flex: none; /* Reset flex to allow wrapping */
+                width: 48%; /* Roughly two columns */
+                margin: 5px 1%;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mood-selector {
+                justify-content: center;
+            }
+
+            .crisis-contacts {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .chatbot-container {
+                bottom: 100px;
+                right: 15px;
+                left: 15px;
+                width: auto;
+                height: 500px;
+            }
+
+            .chatbot-toggle {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+            <span class="logo">🌳</span>
+            <h1>Pulih</h1>
+            <p>Aplikasi Pemulihan Bebas Judi Online</p>
+        </div>
+
+        <div class="navbar">
+            <button onclick="showSection('dashboard')" class="active" id="navDashboard">🏠 Dashboard</button>
+            <button onclick="showSection('daily-activity')" id="navDailyActivity">🗓️ Aktivitas Harian</button>
+            <button onclick="showSection('journal')" id="navJournal">📝 Jurnal</button>
+            <button onclick="showSection('achievements')" id="navAchievements">🏆 Pencapaian</button>
+            <button onclick="showSection('mindfulness')" id="navMindfulness">🧘 Mindfulness</button>
+            <button onclick="showSection('daily-targets')" id="navDailyTargets">🎯 Target Harian</button>
+        </div>
+
+        <div class="main-content">
+            <div class="crisis-banner">
+                <h3>🆘 Butuh Bantuan Segera?</h3>
+                <p>Jika Anda merasa ingin berjudi atau dalam krisis, hubungi bantuan profesional</p>
+                <div class="crisis-contacts">
+                    <a href="tel:119" class="contact-btn">📞 Hotline 119</a>
+                    <a href="https://ayosehat.kemkes.go.id/topik-penyakit/kelainan-mental/kesehatan-jiwa" class="contact-btn" target="_blank">🏥 Sehat Jiwa</a>
+                    <a href="https://pijarpsikologi.org" class="contact-btn" target="_blank">💬 Konseling Online</a>
+                </div>
+            </div>
+
+            <div id="dashboard-section" class="content-section active">
+                <div class="section-box">
+                    <h2 class="section-title">📊 Ringkasan Pemulihan</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="daysSober">0</div>
+                            <div class="stat-label">Hari Bebas Judi</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="journalEntries">0</div>
+                            <div class="stat-label">Entri Jurnal</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="moneySaved">Rp 0</div>
+                            <div class="stat-label">Uang Tersimpan</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="streakLevel">0</div>
+                            <div class="stat-label">Streak Hari Bertahan</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="interactionPoints">0</div>
+                            <div class="stat-label">Poin Interaksi</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-box">
+                    <h2 class="section-title">🔥 Motivasi Harian</h2>
+                    <p style="color: var(--text-color-medium);">"Setiap langkah kecil yang Anda ambil hari ini adalah kemenangan besar menuju kebebasan. Tetaplah kuat, Anda tidak sendirian!"</p>
+                    <p style="margin-top: 10px; color: var(--text-color-medium);">Ingat, **pemulihan adalah sebuah perjalanan, bukan tujuan.** Rayakan setiap kemajuan!</p>
+                </div>
+            </div>
+
+            <div id="daily-activity-section" class="content-section">
+                <div class="section-box">
+                    <h2 class="section-title">🗓️ Aktivitas Harian</h2>
+                    <p style="color: var(--text-color-medium);">Catat aktivitas harian Anda untuk membantu mengidentifikasi pola dan pemicu.</p>
+                    <p style="color: var(--text-color-medium); margin-top: 15px;">Fitur ini akan segera hadir!</p>
+                    <button type="button" class="btn-primary" style="margin-top: 20px;">+ Tambah Aktivitas</button>
+                </div>
+            </div>
+
+            <div id="journal-section" class="content-section">
+                <div class="section-box">
+                    <h2 class="section-title">✨ Daily Check-in & Jurnaling</h2>
+                    <button type="button" class="btn-primary" id="dailyCheckinBtn" onclick="performDailyCheckin()">
+                        ✅ Daily Check-in
+                    </button>
+                    <p style="margin-top: 15px; color: var(--text-color-medium);">
+                        Lakukan check-in harian untuk mempertahankan streak Anda dan dapatkan poin!
+                    </p>
+
+                    <hr style="margin: 30px 0; border-top: 1px dashed var(--border-color-light);">
+
+                    <h2 class="section-title">📝 Tulis Jurnal Hari Ini</h2>
+                    
+                    <div class="form-group">
+                        <label for="currentMood">Bagaimana perasaan Anda hari ini?</label>
+                        <div class="mood-selector">
+                            <button class="mood-btn" data-mood="1">😢 Sangat Buruk</button>
+                            <button class="mood-btn" data-mood="2">😔 Buruk</button>
+                            <button class="mood-btn" data-mood="3">😐 Biasa</button>
+                            <button class="mood-btn" data-mood="4">😊 Baik</button>
+                            <button class="mood-btn" data-mood="5">😄 Sangat Baik</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gamblingUrge">Tingkat keinginan berjudi (1-10):</label>
+                        <input type="range" id="gamblingUrge" min="1" max="10" value="1">
+                        <div style="text-align: center; margin-top: 5px;">
+                            <span id="urgeValue">1</span>/10
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="triggerEvents">Apa yang memicu keinginan berjudi hari ini?</label>
+                        <textarea id="triggerEvents" placeholder="Ceritakan situasi, perasaan, atau hal-hal yang membuat Anda ingin berjudi..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dailyReflection">Refleksi harian Anda:</label>
+                        <textarea id="dailyReflection" placeholder="Bagaimana hari Anda? Apa yang Anda syukuri? Tantangan apa yang dihadapi? Strategi apa yang membantu Anda bertahan?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="copingStrategy">Strategi yang digunakan untuk mengatasi keinginan berjudi:</label>
+                        <select id="copingStrategy">
+                            <option value="">Pilih strategi...</option>
+                            <option value="meditation">Meditasi/Mindfulness</option>
+                            <option value="exercise">Olahraga</option>
+                            <option value="social">Berinteraksi dengan keluarga/teman</option>
+                            <option value="hobby">Melakukan hobi</option>
+                            <option value="professional">Konsultasi profesional</option>
+                            <option value="reading">Membaca</option>
+                            <option value="music">Mendengarkan musik</option>
+                            <option value="other">Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="moneyNotSpent">Perkiraan uang yang tidak dihabiskan untuk judi hari ini:</label>
+                        <input type="number" id="moneyNotSpent" placeholder="0" min="0">
+                    </div>
+
+                    <button type="button" class="btn-primary" onclick="saveJournalEntry()">
+                        💾 Simpan Jurnal & Analisis AI
+                    </button>
+
+                    <div class="loading" id="aiLoading">
+                        <div class="spinner"></div>
+                        <p>Menganalisis jurnal dengan Azure AI...</p>
+                    </div>
+
+                    <div class="ai-analysis" id="aiAnalysisSection" style="display: none;">
+                        <h3>🤖 Analisis AI - Dukungan Pemulihan</h3>
+                        <div id="aiAnalysisContent"></div>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <h2 class="section-title">📚 Riwayat Jurnal</h2>
+                    <div class="journal-entries" id="journalHistory">
+                        <p style="text-align: center; color: var(--text-color-medium); padding: 40px;">
+                            Belum ada entri jurnal. Mulai menulis jurnal pertama Anda!
+                        </p>
+                    </div>
+                    <button type="button" class="btn-secondary" onclick="exportJournal()">📤 Export Jurnal</button>
+                    <button type="button" class="btn-secondary" onclick="clearAllData()">🗑️ Hapus Semua Data</button>
+                </div>
+            </div>
+
+            <div id="achievements-section" class="content-section">
+                <div class="section-box">
+                    <h2 class="section-title">🏆 Pencapaian Saya</h2>
+                    <p style="color: var(--text-color-medium);">Lihat lencana dan pencapaian Anda dalam perjalanan pemulihan.</p>
+                    <ul style="margin-top: 15px; color: var(--text-color-medium); list-style-type: none; padding-left: 0;">
+                        <li>🏅 Lencana Hari Pertama Bebas Judi</li>
+                        <li>🌟 Lencana 7 Hari Bertahan</li>
+                        <li>🚀 Lencana 30 Hari Bertahan</li>
+                        <li>💡 Lencana Jurnal Pertama</li>
+                        <li>💬 Lencana Interaksi AI</li>
+                    </ul>
+                    <p style="color: var(--text-color-medium); margin-top: 15px;">Fitur ini akan segera dikembangkan!</p>
+                </div>
+            </div>
+
+            <div id="mindfulness-section" class="content-section">
+                <div class="section-box">
+                    <h2 class="section-title">🧘 Latihan Mindfulness</h2>
+                    <p style="color: var(--text-color-medium);">Latih pikiran Anda untuk tetap tenang dan fokus. Meditasi singkat atau latihan pernapasan.</p>
+                    <p style="color: var(--text-color-medium); margin-top: 15px;">Segera hadir: Audio panduan meditasi dan latihan pernapasan!</p>
+                    <button type="button" class="btn-primary" style="margin-top: 20px;">Mulai Latihan Pernapasan</button>
+                </div>
+            </div>
+
+            <div id="daily-targets-section" class="content-section">
+                <div class="section-box">
+                    <h2 class="section-title">🎯 Target Harian</h2>
+                    <p style="color: var(--text-color-medium);">Atur target kecil harian untuk membantu Anda tetap termotivasi.</p>
+                    <ul style="margin-top: 15px; color: var(--text-color-medium); list-style-type: none; padding-left: 0;">
+                        <li>✅ Minum 8 gelas air</li>
+                        <li>✅ Jalan kaki 30 menit</li>
+                        <li>✅ Baca buku 15 menit</li>
+                        <li>✅ Hubungi seorang teman</li>
+                    </ul>
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="newDailyTarget">Tambah Target Baru:</label>
+                        <input type="text" id="newDailyTarget" placeholder="Contoh: Belajar masak resep baru">
+                        <button type="button" class="btn-primary" style="margin-top: 10px;">Tambah Target</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <button class="chatbot-toggle" onclick="toggleChatbot()">🤖</button>
+    
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h3>🤖 AI Assistant Pemulihan</h3>
+            <button class="chatbot-close" onclick="toggleChatbot()">×</button>
+        </div>
+        
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message system">
+                Halo! Saya adalah AI Assistant yang siap membantu Anda dalam perjalanan pemulihan dari judi online. Bagaimana perasaan Anda hari ini?
+            </div>
+        </div>
+
+        <div class="quick-responses" id="quickResponses">
+            <div class="quick-response" onclick="sendQuickResponse('Saya merasa ingin berjudi')">😰 Ingin berjudi</div>
+            <div class="quick-response" onclick="sendQuickResponse('Bagaimana cara mengatasi stress?')">😫 Atasi stress</div>
+            <div class="quick-response" onclick="sendQuickResponse('Motivasi untuk hari ini')">💪 Butuh motivasi</div>
+            <div class="quick-response" onclick="sendQuickResponse('Tips menghindari pemicu')">🛡️ Hindari pemicu</div>
+        </div>
+
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+        </div>
+        
+        <div class="chatbot-input-area">
+            <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Ketik pesan Anda..." onkeypress="handleChatKeyPress(event)">
+            <button class="chatbot-send" onclick="sendMessage()" id="sendButton">➤</button>
+        </div>
+    </div>
+
+    <script>
+        let currentMood = null;
+        let streakLevel = 0;
+        let interactionPoints = 0;
+        let lastCheckinDate = null;
+        
+        // **IMPORTANT: Replace with your actual Azure OpenAI credentials**
+        // These are placeholder values and will not work as is.
+        const AZURE_OPENAI_ENDPOINT = "https://dinda-mbsunaiu-eastus2.openai.azure.com/";
+        const AZURE_OPENAI_KEY = "4QPs8vSCZmsvqJwp8nqGZYonW81Iwt6sa9LtolL6RLS5SBYcilIvJQQJ99BFACHYHv6XJ3w3AAAAACOGy5j4";
+        const AZURE_DEPLOYMENT_NAME = "gpt-35-turbo";
+
+        let chatbotOpen = false;
+        let chatHistory = [];
+        let journalEntries = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAppState();
+            updateStatistics();
+            setupEventListeners();
+            initializeChatbot();
+            checkDailyCheckinStatus();
+            applyTheme();
+            // Show dashboard by default
+            showSection('dashboard');
+        });
+
+        function setupEventListeners() {
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentMood = parseInt(this.dataset.mood);
+                });
+            });
+
+            document.getElementById('gamblingUrge').addEventListener('input', function() {
+                document.getElementById('urgeValue').textContent = this.value;
+            });
+
+            document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+        }
+
+        // Function to show/hide sections
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(`${sectionId}-section`).classList.add('active');
+
+            document.querySelectorAll('.navbar button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(`nav${capitalizeFirstLetter(sectionId)}`).classList.add('active');
+        }
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        function saveJournalEntry() {
+            const date = new Date().toISOString().split('T')[0];
+            const mood = currentMood;
+            const urge = document.getElementById('gamblingUrge').value;
+            const triggers = document.getElementById('triggerEvents').value;
+            const reflection = document.getElementById('dailyReflection').value;
+            const copingStrategy = document.getElementById('copingStrategy').value;
+            const money = parseFloat(document.getElementById('moneyNotSpent').value) || 0;
+
+            if (!mood || !triggers || !reflection) {
+                showAlert('Harap isi semua bidang jurnal (Mood, Pemicu, dan Refleksi Harian).', 'warning');
+                return;
+            }
+
+            const entry = {
+                date,
+                mood,
+                urge,
+                triggers,
+                reflection,
+                copingStrategy,
+                money,
+                aiAnalysis: null
+            };
+
+            journalEntries.unshift(entry);
+            saveAppState();
+            renderJournalHistory();
+            updateStatistics();
+            showAlert('Entri jurnal berhasil disimpan!', 'success');
+            
+            interactionPoints += 5; 
+            updateStatistics();
+
+            analyzeJournalWithAI(entry);
+            resetJournalForm();
+        }
+
+        async function analyzeJournalWithAI(entry) {
+            if (!AZURE_OPENAI_ENDPOINT || !AZURE_OPENAI_KEY || !AZURE_DEPLOYMENT_NAME || AZURE_OPENAI_ENDPOINT.includes("YOUR_AZURE_OPENAI_ENDPOINT_HERE")) {
+                showAlert('Kredensial Azure OpenAI belum diatur di dalam kode JavaScript. Analisis AI tidak dapat dilakukan.', 'warning');
+                document.getElementById('aiAnalysisSection').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('aiLoading').style.display = 'block';
+            document.getElementById('aiAnalysisSection').style.display = 'none';
+            document.getElementById('aiAnalysisContent').innerHTML = '';
+
+            const prompt = `Sebagai terapis pemulihan dari judi online yang empatik dan suportif, berikan analisis singkat dan motivasi berdasarkan entri jurnal berikut:
+            Tanggal: ${entry.date}
+            Mood: ${getMoodText(entry.mood)}
+            Tingkat Keinginan Berjudi: ${entry.urge}/10
+            Pemicu: ${entry.triggers}
+            Refleksi Harian: ${entry.reflection}
+            Strategi Mengatasi: ${entry.copingStrategy || 'Tidak disebutkan'}
+            Uang Tersimpan: Rp ${entry.money}
+
+            Berikan analisis mengenai mood, pemicu, dan strategi yang digunakan. Fokus pada penguatan positif dan berikan saran praktis yang konkret dan mudah diaplikasikan untuk hari berikutnya. Hindari memberikan nasihat medis atau finansial. Akhiri dengan kata-kata motivasi yang inspiratif. Maksimal 200 kata.`;
+
+            try {
+                const response = await fetch(`${AZURE_OPENAI_ENDPOINT}/openai/deployments/${AZURE_DEPLOYMENT_NAME}/chat/completions?api-version=2024-02-15-preview`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'api-key': AZURE_OPENAI_KEY
+                    },
+                    body: JSON.stringify({
+                        messages: [{ role: "system", content: "Anda adalah AI Assistant yang membantu individu pulih dari kecanduan judi online. Berikan dukungan, analisis, dan motivasi yang empatik." }, { role: "user", content: prompt }],
+                        max_tokens: 300, 
+                        temperature: 0.7
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const aiText = data.choices[0]?.message?.content.trim();
+                    if (aiText) {
+                        entry.aiAnalysis = aiText;
+                        saveAppState();
+                        document.getElementById('aiAnalysisContent').innerHTML = `<p>${aiText.replace(/\n/g, '<br>')}</p>`;
+                        document.getElementById('aiAnalysisSection').style.display = 'block';
+                    } else {
+                        showAlert('Analisis AI tidak menghasilkan teks. Coba lagi.', 'warning');
+                    }
+                } else {
+                    const errorData = await response.json();
+                    showAlert(`Gagal mendapatkan analisis AI: ${response.status} - ${errorData.message || response.statusText}. Pastikan endpoint, key, dan deployment name Azure OpenAI sudah benar.`, 'danger');
+                }
+            } catch (error) {
+                showAlert(`Terjadi kesalahan saat menghubungi Azure OpenAI untuk analisis: ${error.message}.`, 'danger');
+                console.error('AI analysis error:', error);
+            } finally {
+                document.getElementById('aiLoading').style.display = 'none';
+            }
+        }
+
+        function loadAppState() {
+            const storedEntries = localStorage.getItem('journalEntries');
+            if (storedEntries) {
+                journalEntries = JSON.parse(storedEntries);
+            }
+            const storedChatHistory = localStorage.getItem('chatHistory');
+            if (storedChatHistory) {
+                chatHistory = JSON.parse(storedChatHistory);
+            }
+            const storedStreak = localStorage.getItem('streakLevel');
+            if (storedStreak) {
+                streakLevel = parseInt(storedStreak);
+            }
+            const storedPoints = localStorage.getItem('interactionPoints');
+            if (storedPoints) {
+                interactionPoints = parseInt(storedPoints);
+            }
+            const storedLastCheckin = localStorage.getItem('lastCheckinDate');
+            if (storedLastCheckin) {
+                lastCheckinDate = storedLastCheckin;
+            }
+            renderJournalHistory();
+        }
+
+        function saveAppState() {
+            localStorage.setItem('journalEntries', JSON.stringify(journalEntries));
+            localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+            localStorage.setItem('streakLevel', streakLevel);
+            localStorage.setItem('interactionPoints', interactionPoints);
+            localStorage.setItem('lastCheckinDate', lastCheckinDate);
+        }
+
+        function renderJournalHistory() {
+            const historyDiv = document.getElementById('journalHistory');
+            historyDiv.innerHTML = '';
+
+            if (journalEntries.length === 0) {
+                historyDiv.innerHTML = `<p style="text-align: center; color: var(--text-color-medium); padding: 40px;">Belum ada entri jurnal. Mulai menulis jurnal pertama Anda!</p>`;
+                return;
+            }
+
+            journalEntries.forEach((entry, index) => {
+                const entryDiv = document.createElement('div');
+                entryDiv.classList.add('journal-entry');
+                entryDiv.innerHTML = `
+                    <div class="entry-date"><strong>${entry.date}</strong></div>
+                    <div class="entry-mood">${getMoodText(entry.mood)}</div>
+                    <p><strong>Keinginan Berjudi:</strong> ${entry.urge}/10</p>
+                    <p><strong>Pemicu:</strong> ${entry.triggers}</p>
+                    <p><strong>Refleksi:</strong> ${entry.reflection}</p>
+                    <p><strong>Strategi:</strong> ${entry.copingStrategy || 'Tidak disebutkan'}</p>
+                    <p><strong>Uang Tersimpan:</strong> Rp ${entry.money.toLocaleString('id-ID')}</p>
+                    ${entry.aiAnalysis ? `<div class="ai-analysis" style="margin-top: 15px; background: var(--ai-analysis-bg-light); border-left-color: var(--journal-entry-border-light);">
+                        <h3>🤖 Analisis AI</h3>
+                        <p>${entry.aiAnalysis.replace(/\n/g, '<br>')}</p>
+                    </div>` : ''}
+                `;
+                historyDiv.appendChild(entryDiv);
+            });
+        }
+
+        function getMoodText(moodValue) {
+            switch (moodValue) {
+                case 1: return '😢 Sangat Buruk';
+                case 2: return '😔 Buruk';
+                case 3: return '😐 Biasa';
+                case 4: return '😊 Baik';
+                case 5: return '😄 Sangat Baik';
+                default: return '';
+            }
+        }
+
+        function updateStatistics() {
+            const daysSoberElem = document.getElementById('daysSober');
+            const journalEntriesElem = document.getElementById('journalEntries');
+            const moneySavedElem = document.getElementById('moneySaved');
+            const streakLevelElem = document.getElementById('streakLevel');
+            const interactionPointsElem = document.getElementById('interactionPoints');
+
+            journalEntriesElem.textContent = journalEntries.length;
+            streakLevelElem.textContent = streakLevel;
+            interactionPointsElem.textContent = interactionPoints;
+
+            let totalMoneySaved = 0;
+            journalEntries.forEach(entry => {
+                totalMoneySaved += entry.money;
+            });
+
+            moneySavedElem.textContent = `Rp ${totalMoneySaved.toLocaleString('id-ID')}`;
+
+            if (journalEntries.length > 0) {
+                // Find the earliest journal entry date to calculate days sober
+                const earliestEntryDate = journalEntries.reduce((minDate, entry) => {
+                    const entryDate = new Date(entry.date);
+                    return entryDate < minDate ? entryDate : minDate;
+                }, new Date(journalEntries[0].date)); // Initialize with first entry date
+
+                const today = new Date();
+                // Reset time for accurate day calculation
+                today.setHours(0, 0, 0, 0);
+                earliestEntryDate.setHours(0, 0, 0, 0);
+
+                const diffTime = Math.abs(today.getTime() - earliestEntryDate.getTime());
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                daysSoberElem.textContent = diffDays;
+            } else {
+                daysSoberElem.textContent = '0';
+            }
+        }
+
+        function resetJournalForm() {
+            document.getElementById('triggerEvents').value = '';
+            document.getElementById('dailyReflection').value = '';
+            document.getElementById('gamblingUrge').value = '1';
+            document.getElementById('urgeValue').textContent = '1';
+            document.getElementById('copingStrategy').value = '';
+            document.getElementById('moneyNotSpent').value = '';
+            document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+            currentMood = null;
+            document.getElementById('aiAnalysisSection').style.display = 'none';
+        }
+
+        function exportJournal() {
+            const dataStr = JSON.stringify(journalEntries, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'jurnal_pulih.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showAlert('Data jurnal berhasil diexport!', 'success');
+        }
+
+        function clearAllData() {
+            if (confirm('Anda yakin ingin menghapus semua data jurnal, riwayat chat, streak, dan poin? Tindakan ini tidak dapat dibatalkan.')) {
+                localStorage.clear();
+                journalEntries = [];
+                chatHistory = [];
+                streakLevel = 0;
+                interactionPoints = 0;
+                lastCheckinDate = null;
+                renderJournalHistory();
+                updateStatistics();
+                showAlert('Semua data telah dihapus!', 'danger');
+                initializeChatbot();
+                checkDailyCheckinStatus();
+            }
+        }
+
+        function showAlert(message, type) {
+            const container = document.querySelector('.main-content');
+            const alertDiv = document.createElement('div');
+            alertDiv.classList.add('alert', `alert-${type}`);
+            alertDiv.innerHTML = `<strong>${message}</strong>`;
+            container.insertBefore(alertDiv, container.firstChild);
+
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+
+        function toggleChatbot() {
+            chatbotOpen = !chatbotOpen;
+            const chatbotContainer = document.getElementById('chatbotContainer');
+            if (chatbotOpen) {
+                chatbotContainer.style.display = 'flex';
+                scrollToBottom();
+            } else {
+                chatbotContainer.style.display = 'none';
+            }
+        }
+
+        function initializeChatbot() {
+            const savedChatHistory = localStorage.getItem('chatHistory');
+            if (savedChatHistory) {
+                chatHistory = JSON.parse(savedChatHistory);
+            } else {
+                // If no history, add the initial system message
+                chatHistory = [];
+            }
+
+            document.getElementById('chatbotMessages').innerHTML = '';
+            // Only add system message if chat history is empty or doesn't start with system message
+            if (chatHistory.length === 0 || chatHistory[0]?.type !== 'system') {
+                addMessage('Halo! Saya adalah AI Assistant yang siap membantu Anda dalam perjalanan pemulihan dari judi online. Bagaimana perasaan Anda hari ini?', 'system', false);
+            }
+            chatHistory.forEach(msg => addMessage(msg.content, msg.type, false));
+            scrollToBottom();
+        }
+
+        function addMessage(text, type, addToHistory = true) {
+            const messagesDiv = document.getElementById('chatbotMessages');
+            const messageElem = document.createElement('div');
+            messageElem.classList.add('message', type);
+            messageElem.textContent = text;
+            messagesDiv.appendChild(messageElem);
+            scrollToBottom();
+
+            if (addToHistory) {
+                chatHistory.push({ content: text, type: type });
+                localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+            }
+        }
+
+        function scrollToBottom() {
+            const messagesDiv = document.getElementById('chatbotMessages');
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatbotInput');
+            const messageText = input.value.trim();
+
+            if (!messageText) return;
+
+            addMessage(messageText, 'user');
+            input.value = '';
+            showTypingIndicator();
+            disableChatInput(true);
+
+            if (!AZURE_OPENAI_ENDPOINT || !AZURE_OPENAI_KEY || !AZURE_DEPLOYMENT_NAME || AZURE_OPENAI_ENDPOINT.includes("YOUR_AZURE_OPENAI_ENDPOINT_HERE")) {
+                addMessage('Maaf, kredensial Azure OpenAI belum diatur di dalam kode JavaScript. Chatbot tidak dapat berfungsi.', 'bot');
+                hideTypingIndicator();
+                disableChatInput(false);
+                return;
+            }
+
+            try {
+                const apiMessages = [{ role: "system", content: "Anda adalah AI Assistant yang ramah, empatik, dan mendukung, khusus untuk membantu individu dalam pemulihan dari kecanduan judi online. Berikan saran praktis, motivasi, dan informasi yang relevan. Jangan pernah mendorong perilaku berjudi atau menawarkan nasihat finansial yang tidak relevan. Pertahankan fokus pada kesehatan mental dan pemulihan." }];
+                
+                // Add relevant chat history for context, excluding the initial system message if it's there
+                chatHistory.filter(msg => msg.type === 'user' || msg.type === 'bot').forEach(msg => {
+                    if (msg.type === 'user') apiMessages.push({ role: 'user', content: msg.content });
+                    if (msg.type === 'bot') apiMessages.push({ role: 'assistant', content: msg.content });
+                });
+                apiMessages.push({ role: 'user', content: messageText }); // Add the current message
+
+                const response = await fetch(`${AZURE_OPENAI_ENDPOINT}/openai/deployments/${AZURE_DEPLOYMENT_NAME}/chat/completions?api-version=2024-02-15-preview`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'api-key': AZURE_OPENAI_KEY
+                    },
+                    body: JSON.stringify({
+                        messages: apiMessages,
+                        max_tokens: 300,
+                        temperature: 0.7
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const botResponse = data.choices[0]?.message?.content.trim() || 'Maaf, saya tidak dapat memproses permintaan Anda saat ini.';
+                    addMessage(botResponse, 'bot');
+                    interactionPoints += 2; 
+                    updateStatistics();
+                    saveAppState();
+                } else {
+                    const errorData = await response.json();
+                    addMessage(`Terjadi kesalahan saat memproses pesan Anda: ${errorData.message || response.statusText}.`, 'bot');
+                    console.error('Chatbot API error:', errorData);
+                }
+            } catch (error) {
+                addMessage('Maaf, terjadi masalah koneksi. Pastikan Anda terhubung ke internet dan kredensial Azure OpenAI sudah benar.', 'bot');
+                console.error('Chatbot fetch error:', error);
+            } finally {
+                hideTypingIndicator();
+                disableChatInput(false);
+            }
+        }
+
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendQuickResponse(text) {
+            document.getElementById('chatbotInput').value = text;
+            sendMessage();
+        }
+
+        function showTypingIndicator() {
+            document.getElementById('typingIndicator').style.display = 'flex';
+            scrollToBottom();
+        }
+
+        function hideTypingIndicator() {
+            document.getElementById('typingIndicator').style.display = 'none';
+        }
+
+        function disableChatInput(disabled) {
+            document.getElementById('chatbotInput').disabled = disabled;
+            document.getElementById('sendButton').disabled = disabled;
+        }
+
+        function performDailyCheckin() {
+            const today = new Date().toISOString().split('T')[0];
+            const dailyCheckinBtn = document.getElementById('dailyCheckinBtn');
+
+            if (lastCheckinDate === today) {
+                showAlert('Anda sudah melakukan daily check-in hari ini!', 'info');
+                return;
+            }
+
+            if (lastCheckinDate) {
+                const lastCheckin = new Date(lastCheckinDate);
+                const tomorrow = new Date(lastCheckin);
+                tomorrow.setDate(lastCheckin.getDate() + 1);
+                const tomorrowString = tomorrow.toISOString().split('T')[0];
+
+                if (today === tomorrowString) {
+                    streakLevel += 1;
+                    showAlert(`Daily check-in berhasil! Streak Anda: ${streakLevel} hari.`, 'success');
+                } else {
+                    streakLevel = 1; 
+                    showAlert('Anda melewatkan satu hari. Streak direset menjadi 1 hari. Terus semangat!', 'warning');
+                }
+            } else {
+                streakLevel = 1;
+                showAlert('Daily check-in pertama Anda! Streak dimulai: 1 hari.', 'success');
+            }
+            
+            lastCheckinDate = today;
+            interactionPoints += 10; 
+            updateStatistics();
+            saveAppState();
+            checkDailyCheckinStatus(); 
+        }
+
+        function checkDailyCheckinStatus() {
+            const today = new Date().toISOString().split('T')[0];
+            const dailyCheckinBtn = document.getElementById('dailyCheckinBtn');
+            if (lastCheckinDate === today) {
+                dailyCheckinBtn.textContent = '✅ Sudah Check-in Hari Ini';
+                dailyCheckinBtn.disabled = true;
+                dailyCheckinBtn.style.opacity = 0.7;
+                dailyCheckinBtn.style.cursor = 'not-allowed';
+            } else {
+                dailyCheckinBtn.textContent = '✅ Daily Check-in';
+                dailyCheckinBtn.disabled = false;
+                dailyCheckinBtn.style.opacity = 1;
+                dailyCheckinBtn.style.cursor = 'pointer';
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            document.getElementById('darkModeToggle').textContent = isDarkMode ? '☀️' : '🌙';
+        }
+
+        function applyTheme() {
+            const savedTheme = localStorage.getItem('darkMode');
+            if (savedTheme === 'true') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('darkModeToggle').textContent = '☀️';
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.getElementById('darkModeToggle').textContent = '🌙';
+            }
+        }
+    </script>
+</body>
+</html>
